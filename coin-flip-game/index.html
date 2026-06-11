@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>coin-flip Game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Flip Game</title>
 </head>
 <body>
+  <h1>Coin Flip Game</h1>
+  <p>Make your guess:</p>
+
+  <button onclick="playGame('heads')">Heads</button>
+  <button onclick="playGame('tails')">Tails</button>
+
+  <p id="result"></p>
+  <p id="score"></p>
+
   <script>
+    let wins = 0;
+    let losses = 0;
 
-  let ranNumber = Math.random();
-  let guess = 'heads';
-  let result = (ranNumber < 0.5 ) ? 'heads' : 'tails';
-  console.log(guess == result) ? 'You win!' : 'You lose';
+    function playGame(guess) {
+      const ranNumber = Math.random();
+      const result = ranNumber < 0.5 ? 'heads' : 'tails';
 
+      const resultElement = document.querySelector('#result');
+      const scoreElement = document.querySelector('#score');
+
+      if (guess === result) {
+        wins++;
+        resultElement.innerHTML = `You guessed <b>${guess}</b> — Result: <b>${result}</b> ✅ You Win!`;
+      } else {
+        losses++;
+        resultElement.innerHTML = `You guessed <b>${guess}</b> — Result: <b>${result}</b> ❌ You Lose!`;
+      }
+
+      scoreElement.innerHTML = `Wins: ${wins} | Losses: ${losses}`;
+    }
   </script>
 </body>
 </html>
